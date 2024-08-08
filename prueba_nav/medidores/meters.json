@@ -1,0 +1,15 @@
+{
+    "Norte": {
+        "STATE": "OFF",
+        "IP": "11231231",
+        "ID": "1111",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": false,
+            "Tension": false,
+            "Factor de Potencia": false
+        }
+    }
+}

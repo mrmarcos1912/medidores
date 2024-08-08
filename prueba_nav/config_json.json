@@ -1,0 +1,34 @@
+{
+    "credentials": {
+        "usernames": {
+            "admin": {
+                "email": "",
+                "name": "admin",
+                "password": "admin",
+                "recibir_correo": false
+            },
+            "stefano": {
+                "email": "stefanomanasserodon@gmail.com",
+                "name": "Stefano Manassero Don",
+                "password": "$2b$12$MfpWKhD/vt5k6kRN/6x2Ae1PnVzPloajmBcNXfB037waGdvGV7vV6",
+                "recibir_correo": true
+            },
+            "pablo": {
+                "email": "pablopecantel@gmail.com",
+                "name": "Pablo Pecantel",
+                "password": "$2b$12$YeReneacf6miD5FOwPoI2O/PsUjo8fpK2mlcEER06N/kdc6bN/Mm2",
+                "recibir_correo": true
+            }
+        }
+    },
+    "cookie": {
+        "expiry_days": 30,
+        "key": "some_signature_key",
+        "name": "some_cookie_name"
+    },
+    "preauthorized": {
+        "emails": [
+            "melsby@gmail.com"
+    ]
+    }
+}
