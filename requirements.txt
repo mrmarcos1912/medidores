@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+matplotlib
+streamlit_authenticator
+json
+plotly.graph_objects
+pymodbus
