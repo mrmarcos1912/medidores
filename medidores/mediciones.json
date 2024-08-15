@@ -1,0 +1,26 @@
+{
+    "A": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "Factor de Potencia": 0
+    },
+    "B": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "Factor de Potencia": 0
+    },
+    "C": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "Factor de Potencia": 0
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "A": {
+        "STATE": "OFF",
+        "IP": "1.1.1",
+        "ID": "1",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": false,
+            "Tension": false,
+            "Factor de Potencia": false
+        }
+    },
+    "B": {
+        "STATE": "OFF",
+        "IP": "1111",
+        "ID": "111",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": false,
+            "Tension": false,
+            "Factor de Potencia": false
+        }
+    },
+    "C": {
+        "STATE": "OFF",
+        "IP": "123",
+        "ID": "123",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": false,
+            "Tension": false,
+            "Factor de Potencia": false
+        }
+    }
+}
