@@ -3,7 +3,6 @@ import streamlit_authenticator as stauth
 import json
 import pandas as pd
 import numpy as np
-from streamlit_extras.stylable_container import stylable_container
 import plotly.graph_objects as go
 from connection import connection
 
