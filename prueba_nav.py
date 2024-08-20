@@ -5,9 +5,9 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 from connection import connection
+from streamlit_extras.stylable_container import stylable_container
 
-
-st.set_page_config(page_title="Prueba")
+st.set_page_config(page_title="Dashboard", page_icon="📊")
 
 # Inicializacion lista medidores #
 with open("medidores/meters.json", "r") as file:
@@ -55,10 +55,11 @@ elif authentication_status:
     
     #Lista parametros
     if dataMedidores:
-        space, cola, space, colb, space = st.columns([0.3, 1, 0.2, 1, 0.2])
-        cola.subheader(f'Dashboard "{medidor}"')
+        space, cola, space, colb, space = st.columns([0.1, 1.3, 0.1, 1, 0.2])
+        cola.subheader(f'{medidor}')
         if colb.button(label="Actualizar", use_container_width=True):
             connection(medidor)
+            st.rerun()
         col1, espacio, col2, espacio, col3 = st.columns([1, 0.2, 1, 0.2, 1])
         columns = [col1, col2, col3]
         listParams = list(dataMedidores[medidor]["PARAMS"].keys())
@@ -66,19 +67,26 @@ elif authentication_status:
         for idx, element in enumerate(true_params):
             valorBool = dataMedidores[medidor]["PARAMS"][element]
             if valorBool:
-                fig = go.Figure(go.Indicator(
-                    domain = {'x': [0, 1], 'y': [0, 1]},
-                    value = dataMediciones[medidor][element],
-                    mode = "gauge+number+delta",
-                    title = {'text': element},
-                    delta = {'reference': 380},
-                    gauge = {'axis': {'range': [None, 500]},
-                            'steps' : [
-                                {'range': [0, 250], 'color': "lightgray"},
-                                {'range': [250, 400], 'color': "gray"}],
-                            'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 490}}))
-                fig.update_layout(margin=dict(t=0, b=0, l=0, r=0), height= 200)
-                columns[idx % 3].plotly_chart(fig, use_container_width=True)
+                label = element
+                value = round(dataMediciones[medidor][element], 2)
+                delta = 10
+                # columns[idx % 3].metric(label= label, value= value, delta= delta)
+                with columns[idx % 3]:
+                    with stylable_container(
+                        key= "medicion",
+                        css_styles=
+                        """
+                        div[data-testid="stMetric"] {
+                            background-color: rgb(255 255 255 / 4%);
+                            color: white;
+                            border: 1px solid #d0d3d4;
+                            border-radius: 10px;
+                            padding: 20px 20px 20px 55px;
+                            box-shadow: 1px 3px 3px #d0d3d4;
+                        }
+                        """
+                        ):
+                            st.metric(label, value, delta)
 
     # chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["Activa", "Reactiva", "Aparente"])
     # st.line_chart(chart_data)
