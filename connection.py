@@ -39,6 +39,7 @@ def connection(medidor):
             dataMedidores[medidor]["STATE"] = "ON"
             with open("medidores/meters.json", "w") as file:
                 json.dump(dataMedidores, file, indent=4)
+            print("Conectado")
 
             # --- Toma de valores de los HR --- #
             activa_f = read_float(client, 3059, ID)

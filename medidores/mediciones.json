@@ -1,5 +1,5 @@
 {
-    "A": {
+    "Medidor A": {
         "Activa": 0,
         "Reactiva": 0,
         "Aparente": 0,
@@ -7,7 +7,7 @@
         "Tension": 0,
         "Factor de Potencia": 0
     },
-    "B": {
+    "Medidor B": {
         "Activa": 0,
         "Reactiva": 0,
         "Aparente": 0,
@@ -15,7 +15,15 @@
         "Tension": 0,
         "Factor de Potencia": 0
     },
-    "C": {
+    "Medidor Peatonal Norte": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "Factor de Potencia": 0
+    },
+    "Medidor Peatonal Sur": {
         "Activa": 0,
         "Reactiva": 0,
         "Aparente": 0,
