@@ -4,7 +4,7 @@
             "admin": {
                 "email": "",
                 "name": "admin",
-                "password": "admin",
+                "password": "$2b$12$kchO9VR9q2YO5mda5byoX.nHYfrORsqqY3Uz01M9tb8tCNkDl35/a",
                 "recibir_correo": false
             },
             "stefano": {
