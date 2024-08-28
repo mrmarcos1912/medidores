@@ -4,10 +4,18 @@ import json
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import plotly.express as px
 from connection import connection
 from streamlit_extras.stylable_container import stylable_container
+import sqlite3
+import time
+from datetime import datetime, timedelta, time
 
 st.set_page_config(page_title="Dashboard", page_icon="📊")
+
+# Desmarcar para que la pagina ocupe todo el ancho de la pantalla #
+# with open('.streamlit/styles.css') as f:
+#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Inicializacion lista medidores #
 with open("medidores/meters.json", "r") as file:
@@ -58,7 +66,6 @@ elif authentication_status:
         space, cola, space, colb, space = st.columns([0.1, 1.3, 0.1, 1, 0.2])
         cola.subheader(f'{medidor}')
         if colb.button(label="Actualizar", use_container_width=True):
-            connection(medidor)
             st.rerun()
         col1, espacio, col2, espacio, col3 = st.columns([1, 0.2, 1, 0.2, 1])
         columns = [col1, col2, col3]
@@ -67,7 +74,10 @@ elif authentication_status:
         for idx, element in enumerate(true_params):
             valorBool = dataMedidores[medidor]["PARAMS"][element]
             if valorBool:
-                label = element
+                if element == "FactordePotencia":
+                    label = "Factor de Potencia"
+                else:
+                    label = element
                 value = round(dataMediciones[medidor][element], 2)
                 delta = 10
                 # columns[idx % 3].metric(label= label, value= value, delta= delta)
@@ -88,5 +98,51 @@ elif authentication_status:
                         ):
                             st.metric(label, value, delta)
 
-    # chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["Activa", "Reactiva", "Aparente"])
-    # st.line_chart(chart_data)
+    # --- Grafica de valores --- #
+    st.divider()
+    # Manejo de limites temporales
+    st.text("Ingrese el rango temporal para la visualizacion de valores:")
+    c1, c2 = st.columns(2)
+    dia1 = c1.date_input(label="Fecha inicial:")
+    dia2 = c2.date_input(label="Fecha final", value=datetime.now().date() + + timedelta(days=1))
+    hora1 = c1.time_input(label="Hora inicial", value= time(0,0,0))
+    hora2 = c2.time_input(label="Hora final", value=time(23,59,59))
+    fecha1 = datetime.combine(dia1, hora1)
+    fecha2 = datetime.combine(dia2, hora2)
+    # Division en tabs de los parametros
+    tablas = st.tabs(listParams)
+    for n in range(len(listParams)):
+        parametro = listParams[n]
+        with tablas[n]:
+            if parametro == "FactordePotencia":
+                st.header(f":blue[Factor de Potencia]")
+            else:
+                st.header(f":blue[{parametro}]")
+            conn = sqlite3.connect("mediciones.db")
+            query = f"SELECT tiempo, {parametro} AS parametro FROM mediciones WHERE medidor = '{medidor}'"
+            df = pd.read_sql_query(query, conn)
+            # Crear la gráfica de corriente vs tiempo
+            if parametro != "FactordePotencia":
+                fig = px.line(df, x='Tiempo', y='parametro', title=f'{parametro} vs Tiempo')
+            else:
+                fig = px.line(df, x='Tiempo', y='parametro', title=f'Factor de Potencia vs Tiempo')
+            fig.update_xaxes(range=[fecha1, fecha2])
+
+            # Mostrar la gráfica en Streamlit
+            st.plotly_chart(fig)
+
+# params = st.query_params
+
+# # Verificar si hay un parámetro 'refresh'
+# if "refresh" in params:
+#     refresh_time = 10
+# else:
+#     refresh_time = 10  # Valor por defecto
+
+# # Mostrar la hora actual
+# st.write(f"Tiempo actual: {time.strftime('%H:%M:%S')}")
+
+# # Refrescar la página cada 10 segundos
+# st.query_params["refresh"] = str(refresh_time)
+# time.sleep(refresh_time)
+# st.rerun()
