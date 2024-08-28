@@ -34,7 +34,7 @@ if 'params' not in st.session_state:
                 "Aparente": False,
                 "Corriente": False,
                 "Tension": False,
-                "Factor de Potencia": False
+                "FactordePotencia": False
             })
 
 # Funciones para agregar y eliminar medidores
@@ -61,7 +61,7 @@ def add_to_list(agregar, ip, id):
                 "Aparente": False,
                 "Corriente": False,
                 "Tension": False,
-                "Factor de Potencia": False
+                "FactordePotencia": False
             }
         }
     }
@@ -73,7 +73,7 @@ def add_to_list(agregar, ip, id):
             "Aparente": 0,
             "Corriente": 0,
             "Tension": 0,
-            "Factor de Potencia": 0
+            "FactordePotencia": 0
         }
     }
     mediciones.update(nuevos_parametros)
@@ -89,9 +89,9 @@ def add_to_list(agregar, ip, id):
         "Aparente": False,
         "Corriente": False,
         "Tension": False,
-        "Factor de Potencia": False
+        "FactordePotencia": False
     }
-    connection(agregar)
+    connection()
     st.rerun()
 
 
@@ -145,6 +145,8 @@ if st.session_state.form_agregar_medidor:
         if cancel:
             st.session_state.form_agregar_medidor = False
             st.rerun()
+
+
 # Mostrar los medidores configurados en tabs
 if st.session_state.lista_medidores:
     st.divider()
@@ -161,6 +163,7 @@ if st.session_state.lista_medidores:
                 st.markdown("Estado: :red[Desconectado]")
             st.markdown(f"Direccion IP del equipo: :blue[{medidores[nombre]["IP"]}]")
             st.markdown(f"ID del equipo: :blue[{medidores[nombre]["ID"]}]")
+            st.text("Seleccione los valores a visualizar:")
             col1, col2 = st.columns(2)
             # Parametros de interes para mostrar en el dashboard
             potAct = col1.toggle(label= "Potencia Activa", key=f"potAct_{n}", value=st.session_state.params[nombre]["Activa"])
@@ -168,7 +171,7 @@ if st.session_state.lista_medidores:
             potApt = col1.toggle(label= "Potencia Aparente", key=f"potApt_{n}", value=st.session_state.params[nombre]["Aparente"])
             corrientes = col2.toggle(label= "Corrientes", key=f"corrientes_{n}", value=st.session_state.params[nombre]["Corriente"])
             tensiones = col2.toggle(label= "Tensiones", key=f"tensiones_{n}", value=st.session_state.params[nombre]["Tension"])
-            fdp = col2.toggle(label= "Factor de Potencia", key=f"fdp_{n}", value=st.session_state.params[nombre]["Factor de Potencia"])
+            fdp = col2.toggle(label= "Factor de Potencia", key=f"fdp_{n}", value=st.session_state.params[nombre]["FactordePotencia"])
             if st.button(label="Save", key=f"btn_{n}", use_container_width=True):
                 medidores[nombre]["PARAMS"] = {
                     "Activa": potAct,
@@ -176,7 +179,7 @@ if st.session_state.lista_medidores:
                     "Aparente": potApt,
                     "Corriente": corrientes,
                     "Tension": tensiones,
-                    "Factor de Potencia": fdp
+                    "FactordePotencia": fdp
                 }
                 st.session_state.params[nombre] = {
                     "Activa": potAct,
@@ -184,12 +187,12 @@ if st.session_state.lista_medidores:
                     "Aparente": potApt,
                     "Corriente": corrientes,
                     "Tension": tensiones,
-                    "Factor de Potencia": fdp
+                    "FactordePotencia": fdp
                 }
                 with open("medidores/meters.json", "w") as file:
                         json.dump(medidores, file, indent=4)
             if st.button(label="Reconnect", key=f"reconnect_{n}",use_container_width=True):
-                connection(nombre)
+                connection()
                 st.rerun()
 
 # --- Cuando se inicializa esta pagina, realizar un reconnect --- #
