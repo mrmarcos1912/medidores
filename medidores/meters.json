@@ -1,4 +1,17 @@
 {
+    "Medidor C": {
+        "STATE": "OFF",
+        "IP": "10.36.44.20",
+        "ID": "3",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": true,
+            "Tension": true,
+            "FactordePotencia": true
+        }
+    },
     "Medidor A": {
         "STATE": "OFF",
         "IP": "10.36.44.20",
@@ -7,9 +20,9 @@
             "Activa": true,
             "Reactiva": true,
             "Aparente": true,
-            "Corriente": true,
-            "Tension": true,
-            "Factor de Potencia": true
+            "Corriente": false,
+            "Tension": false,
+            "FactordePotencia": false
         }
     },
     "Medidor B": {
@@ -17,28 +30,67 @@
         "IP": "10.36.44.20",
         "ID": "5",
         "PARAMS": {
-            "Activa": true,
+            "Activa": false,
+            "Reactiva": true,
+            "Aparente": true,
+            "Corriente": false,
+            "Tension": false,
+            "FactordePotencia": false
+        }
+    },
+    "Medidor Norte": {
+        "STATE": "OFF",
+        "IP": "10.36.44.20",
+        "ID": "8",
+        "PARAMS": {
+            "Activa": false,
             "Reactiva": false,
             "Aparente": false,
             "Corriente": true,
             "Tension": true,
-            "Factor de Potencia": false
+            "FactordePotencia": false
         }
     },
-    "Medidor Peatonal Norte": {
+    "Medidor Sur": {
+        "STATE": "OFF",
+        "IP": "10.36.44.20",
+        "ID": "11",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": true,
+            "Tension": false,
+            "FactordePotencia": false
+        }
+    },
+    "Medidor D": {
+        "STATE": "OFF",
+        "IP": "10.36.44.20",
+        "ID": "7",
+        "PARAMS": {
+            "Activa": false,
+            "Reactiva": false,
+            "Aparente": false,
+            "Corriente": true,
+            "Tension": true,
+            "FactordePotencia": true
+        }
+    },
+    "Peatonal Norte": {
         "STATE": "OFF",
         "IP": "10.36.44.20",
         "ID": "6",
         "PARAMS": {
-            "Activa": true,
+            "Activa": false,
             "Reactiva": false,
             "Aparente": false,
             "Corriente": true,
             "Tension": true,
-            "Factor de Potencia": false
+            "FactordePotencia": false
         }
     },
-    "Medidor Peatonal Sur": {
+    "Peatonal Sur": {
         "STATE": "OFF",
         "IP": "10.36.44.20",
         "ID": "10",
@@ -46,9 +98,9 @@
             "Activa": true,
             "Reactiva": true,
             "Aparente": true,
-            "Corriente": true,
-            "Tension": true,
-            "Factor de Potencia": true
+            "Corriente": false,
+            "Tension": false,
+            "FactordePotencia": false
         }
     }
 }

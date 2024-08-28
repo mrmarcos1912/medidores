@@ -5,7 +5,7 @@
         "Aparente": 0,
         "Corriente": 0,
         "Tension": 0,
-        "Factor de Potencia": 0
+        "FactordePotencia": 0
     },
     "Medidor B": {
         "Activa": 0,
@@ -13,22 +13,54 @@
         "Aparente": 0,
         "Corriente": 0,
         "Tension": 0,
-        "Factor de Potencia": 0
+        "FactordePotencia": 0
     },
-    "Medidor Peatonal Norte": {
+    "Medidor Norte": {
         "Activa": 0,
         "Reactiva": 0,
         "Aparente": 0,
         "Corriente": 0,
         "Tension": 0,
-        "Factor de Potencia": 0
+        "FactordePotencia": 0
     },
-    "Medidor Peatonal Sur": {
+    "Medidor Sur": {
         "Activa": 0,
         "Reactiva": 0,
         "Aparente": 0,
         "Corriente": 0,
         "Tension": 0,
-        "Factor de Potencia": 0
+        "FactordePotencia": 0
+    },
+    "Medidor C": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "FactordePotencia": 0
+    },
+    "Medidor D": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "FactordePotencia": 0
+    },
+    "Peatonal Norte": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "FactordePotencia": 0
+    },
+    "Peatonal Sur": {
+        "Activa": 0,
+        "Reactiva": 0,
+        "Aparente": 0,
+        "Corriente": 0,
+        "Tension": 0,
+        "FactordePotencia": 0
     }
 }
