@@ -6,3 +6,4 @@ streamlit_authenticator
 plotly
 pymodbus
 streamlit_extras
+schedule
