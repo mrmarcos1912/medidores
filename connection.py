@@ -37,12 +37,11 @@ def connection():
     for medidor in lista_medidores:
         IP = dataMedidores[medidor]["IP"]
         ID = int(dataMedidores[medidor]["ID"])
-        client = ModbusTcpClient(IP, timeout = 2)
+        client = ModbusTcpClient(IP, timeout = 5)
         try:
             if client.connect():
                 # --- Indicador de conexión --- #
                 dataMedidores[medidor]["STATE"] = "ON"
-                print("Conectado")
                 with open("medidores/meters.json", "w") as file:
                     json.dump(dataMedidores, file, indent=4)
                 # --- Toma de valores de los HR --- #
@@ -54,7 +53,20 @@ def connection():
                 fdp_f = read_float(client, 3083, ID)
                 # --- Almacenar tiempo en el que se toman los datos (aaaa-mm-dd hh:mm:ss)--- #
                 tiempo = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
+                # --- Chequeo si supera los valores maximos guardados --- #
+                listaParametros = [activa_f, reactiva_f, aparente_f, corriente_f, tension_f, fdp_f]
+                listaNombresParametros = ["Activa", "Reactiva", "Aparente", "Corriente", "Tension", "FactordePotencia"]
+                for n in range(0, len(listaParametros)):
+                    with open("medidores/maximos.json", "r") as file:
+                        dictMaximos = json.load(file)
+                    valorViejo = dictMaximos[medidor][listaNombresParametros[n]]["Valor"]
+                    valorNuevo = listaParametros[n]
+                    if abs(valorViejo) < abs(valorNuevo):
+                        dictMaximos[medidor][listaNombresParametros[n]]["Valor"] = valorNuevo
+                        dictMaximos[medidor][listaNombresParametros[n]]["Tiempo"] = tiempo
+                    with open("medidores/maximos.json", "w") as file:
+                        json.dump(dictMaximos, file, indent=4)
+                print("conectado...")
                 # --- Guardado de resultados --- #
                 if None not in (activa_f, reactiva_f, aparente_f, corriente_f, tension_f, fdp_f, tiempo):
                     with open("medidores/mediciones.json", "r") as file:

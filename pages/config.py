@@ -37,9 +37,10 @@ if 'params' not in st.session_state:
                 "FactordePotencia": False
             })
 
-# Funciones para agregar y eliminar medidores
+# Funciones para agregar y eliminar medidores #
 def add_to_list(agregar, ip, id):
     st.session_state.lista_medidores.append(agregar)
+    # Se inicializan los arhcivos con los medidores, las mediciones instantaneas y los maximos.
     try:
         with open("medidores/meters.json", "r") as data_file:
             medidores = json.load(data_file)
@@ -50,6 +51,11 @@ def add_to_list(agregar, ip, id):
             mediciones = json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         mediciones = {}
+    try:
+        with open("medidores/maximos.json", "r") as file:
+            maximos = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        maximos = {}
     nuevo_medidor = {
         agregar: {
             "STATE": "ON",
@@ -77,10 +83,41 @@ def add_to_list(agregar, ip, id):
         }
     }
     mediciones.update(nuevos_parametros)
+    nuevos_maximos = {
+        agregar: {
+            "Activa": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+            "Reactiva": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+            "Aparente": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+            "Corriente": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+            "Tension": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+            "FactordePotencia": {
+                "Valor": 0,
+                "Tiempo": 0
+            },
+        }
+    }
+    maximos.update(nuevos_maximos)
     with open("medidores/meters.json", "w") as data_file:
         json.dump(medidores, data_file, indent=4)
     with open("medidores/mediciones.json", "w") as file:
         json.dump(mediciones, file, indent=4)
+    with open("medidores/maximos.json", "w") as file:
+        json.dump(maximos, file, indent=4)
     st.success(f"Medidor {agregar} agregado exitosamente!")
     st.session_state.form_agregar_medidor = False
     st.session_state.params[agregar] = {
